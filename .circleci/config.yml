@@ -21,7 +21,7 @@ jobs:
                . 00-fetch-latest-version.sh
                ./01-build-image.sh
                docker login -u $DOCKER_USER -p $DOCKER_PASS
-               ./02-publish-image.sh
+               TAG_LATEST=1 ./02-publish-image.sh
 workflows:
   version: 2
   commit:
