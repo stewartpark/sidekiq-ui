@@ -1,7 +1,14 @@
 require 'sidekiq'
 
 Sidekiq.configure_client do |config|
-    config.redis = { :size => 1 }
+  if ENV['REDIS_CLUSTER_URLS'].nil?
+    config.redis = { size: 1 }
+  else
+    config.redis = {
+      cluster: ENV['REDIS_CLUSTER_URLS'].split(','),
+      namespace: "{#{ENV.fetch('REDIS_CLUSTER_KEY')}}"
+    }
+  end
 end
 
 require 'sidekiq/web'
