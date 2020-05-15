@@ -5,6 +5,7 @@ ARG SIDEKIQ_PROMETHEUS_EXPORTER_VERSION
 RUN gem install sidekiq -v "${SIDEKIQ_VERSION}" && \
     gem install puma -v "${PUMA_VERSION}" && \
     gem install sidekiq-prometheus-exporter -v "${SIDEKIQ_PROMETHEUS_EXPORTER_VERSION}" && \
+    gem install redis-namespace -v 1.7.0 && \
     useradd -ms /bin/sh sidekiq
 USER sidekiq
 EXPOSE 9292
